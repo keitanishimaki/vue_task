@@ -11,7 +11,7 @@ Vue.component('tab', {
             id="cat-tab"
             role="tab"
             aria-controls="cat"
-            :aria-selected="true"
+            :aria-selected="current === 'cat'"
             @click="emitTabOne"
           >ねこ</a>
         </li>
@@ -22,7 +22,7 @@ Vue.component('tab', {
             id="dog-tab"
             role="tab"
             aria-controls="dog"
-            :aria-selected="false"
+            :aria-selected="current === 'dog'"
             @click="emitTabTwo"
           >いぬ</a>
         </li>
@@ -56,30 +56,32 @@ Vue.component('tab', {
     </div>
   </div>
   `,
+
   props: [
-    'current'
+    'current',
   ],
-  
+
   methods: {
     emitTabOne() {
-      this.$emit('tab-one', this.current);
+      this.$emit('tab-one');
     },
     emitTabTwo() {
-      this.$emit('tab-two' , this.current);
+      this.$emit('tab-two');
     },
   },
 });
 
 new Vue({
   el: '#app',
-  data: {
+  data : {
     current: 'cat',
-    current: 'dog',
   },
+  
   methods: {
     onTabOne () {
       this.current = 'cat'
     },
+
     onTabTwo () {
       this.current = 'dog'
     },
